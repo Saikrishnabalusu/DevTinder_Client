@@ -1,21 +1,33 @@
 import React from 'react'
 import { useState } from 'react'
-import { API_URL } from '../Utils/constants'
+import { BASE_URL } from '../Utils/constants'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { addUser } from '../reducers/userReducer'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [email, setEmail] = useState('neeru@gmail.com')
     const [password, setPassword] = useState('Kittu@123')
-
+    const navigate = useNavigate()
+    // const loginUser = useSelector(store => store.user)
+    const dispatch = useDispatch();
     const submitLogin = async () => {
         // Implement login logic here
-        const payload = {
-            email,
-            password
+        try {
+            const payload = {
+                email,
+                password
+            }
+            const res = await axios.post(BASE_URL + "/login", payload, { withCredentials: true })
+
+            console.log(res.data?.data);
+            dispatch(addUser(res?.data?.data))
+            navigate("/")
+        } catch (error) {
+            console.log(error.message);
+
         }
-        const res = await axios.post(`${API_URL}/login`, payload, { withCredentials: true })
-        console.log(res.data);
-        console.log("Login button clicked");
     }
     return (
         <div className="hero bg-base-200 min-h-screen min-w-2/3 p-0">
