@@ -1,0 +1,54 @@
+<svg
+  width="660"
+  height="660"
+  viewBox="0 0 360 360"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background -->
+  <rect width="360" height="360" rx="32" fill=""/>
+
+  <!-- Left Code Bracket -->
+  <path
+    d="M130 110 L90 180 L130 250"
+    stroke="#38BDF8"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Right Code Bracket -->
+  <path
+    d="M230 110 L270 180 L230 250"
+    stroke="#38BDF8"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Heart -->
+  <path
+    d="M180 245
+       C140 210, 95 180, 140 135
+       C165 110, 180 125, 180 135
+       C180 125, 195 110, 220 135
+       C265 180, 220 210, 180 245Z"
+    fill="#F43F5E"
+  />
+
+  <!-- Connection Dot -->
+  <circle cx="180" cy="180" r="10" fill="#22C55E"/>
+
+  <!-- App Name -->
+  <text
+    x="50%"
+    y="320"
+    text-anchor="middle"
+    fill="#E5E7EB"
+    font-size="28"
+    font-family="Inter, Segoe UI, sans-serif"
+    font-weight="600"
+  >
+    DevTinder
+  </text>
+</svg>
