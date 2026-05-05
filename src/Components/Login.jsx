@@ -119,7 +119,7 @@ const Login = () => {
                             <button className="btn btn-neutral mt-4" onClick={formType === "login" ? submitLogin : handleSignup}>{formType === "login" ? "Login" : "Sign Up"}</button>
 
                         </fieldset>
-                        <p className='text-left text-orange-500 cursor-pointer' onClick={() => setFormType("signup")}>Not already a member? SignUp Now</p>
+                        {formType === "login" && (<p className='text-left text-orange-500 cursor-pointer' onClick={() => setFormType("signup")}>Not already a member? SignUp Now</p>)}
                     </div>
                 </div>
             </div>
