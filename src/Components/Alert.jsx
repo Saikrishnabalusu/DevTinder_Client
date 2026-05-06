@@ -20,9 +20,9 @@ const Alert = ({ type, message }) => {
     return (
         showAlert && (<div className="toast toast-top toast-end absolute top-16 w-96 h-16 z-50 ">
             <div className='w-full h-full relative'>
-                <div className={` ${alertClassMap[type] ?? alertClassMap.info}  overflow-auto h-16`}>
+                <div className={` ${alertClassMap[type] ?? alertClassMap.info}  overflow-auto h-16 px-1`}>
                     <span className='w-full h-full'>{message}</span>
-                    <span className='absolute top-auto right-0 cursor-pointer' onClick={() => setShowAlert(false)}>❌</span>
+                    <span className='absolute top-auto right-0.5 cursor-pointer' onClick={() => setShowAlert(false)}>❌</span>
                 </div>
             </div>
 

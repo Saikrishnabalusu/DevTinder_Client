@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import axios from "axios"
 import { BASE_URL } from '../Utils/constants'
 import Card from './Card'
