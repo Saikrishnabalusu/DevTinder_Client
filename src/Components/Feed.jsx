@@ -42,7 +42,8 @@ const Feed = () => {
     }
 
     return (
-        <div className="feedContainer w-full h-full bg-base-900 flex justify-center items-center gap-4 flex-wrap mt-16 pt-4">
+        <div className="feedContainer w-full h-full bg-base-900 flex justify-center items-center gap-4 flex-wrap mt-16 pt-4 ">
+
             {!feedUsers.length === 0 ? "loading..." : (feedUsers.map(user => {
                 return <Card key={user._id} id={user._id} firstName={user?.firstName} lastName={user?.lastName} age={user?.age} about={user?.about} skills={user?.skills} gender={user?.gender} profileUrl={user?.profileUrl} showButton={true} handleInterested={handleInterested} handleIgnored={handleIgnored} />
             }))}

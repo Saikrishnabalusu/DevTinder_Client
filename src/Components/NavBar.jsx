@@ -13,7 +13,7 @@ const NavBar = () => {
     const handleLogout = async () => {
         await axios.post(BASE_URL + "/logout", {}, { withCredentials: true })
         dispatch(removeUser())
-        navigate("/login")
+        navigate("/login", { replace: true })
     }
     return (
         <div className="navbar bg-base-300 shadow-sm fixed top-0 z-50">

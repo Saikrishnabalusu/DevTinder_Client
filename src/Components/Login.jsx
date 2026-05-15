@@ -2,26 +2,29 @@ import React from 'react'
 import { useState } from 'react'
 import { BASE_URL } from '../Utils/constants'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '../reducers/userReducer'
 import { useNavigate } from 'react-router-dom'
 import Alert from './Alert'
+import { Navigate } from 'react-router-dom'
 
 const Login = () => {
+    const [formType, setFormType] = useState('login')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('neeru@gmail.com')
     const [password, setPassword] = useState('Kittu@123')
     const [age, setAge] = useState('')
     const [gender, setGender] = useState('')
+    const [profileUrl, setProfileUrl] = useState("")
     const [showAlert, setShowAlert] = useState(false);
     const [alertMsg, setAlertMsg] = useState('')
     const [alertType, setAlertType] = useState('info')
-    const [formType, setFormType] = useState('login')
+    const loginUser = useSelector(state => state.user.value)
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-
+    if (loginUser) return (<Navigate to="/" replace />);
     const submitLogin = () => {
         setAlertMsg('')
         setShowAlert(false);
@@ -36,7 +39,7 @@ const Login = () => {
                 setAlertType("success");
                 setShowAlert(true);
                 dispatch(addUser(res?.data?.data))
-                navigate("/")
+                navigate("/", { replace: true })
             }).catch((err) => {
                 setAlertMsg(err.response?.data || "An error occurred");
                 setAlertType("error");
@@ -55,6 +58,7 @@ const Login = () => {
         setAlertMsg('')
         setShowAlert(false);
         setFormType('signup')
+
         try {
             const payload = {
                 firstName,
@@ -62,7 +66,8 @@ const Login = () => {
                 email,
                 password,
                 age,
-                gender
+                gender,
+                profileUrl
             }
             setShowAlert(false);
             axios.post(BASE_URL + "/signup", payload, { withCredentials: true }).then((res) => {
@@ -114,12 +119,18 @@ const Login = () => {
                                 <label className="label">Age</label>
                                 <input type="number" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
                                 <label className="label">Gender</label>
-                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Gender" value={gender} onChange={(e) => setGender(e.target.value)} /></>)}
+                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+                                <label className="label">ProfileUrl</label>
+                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Your Profile url" value={profileUrl} onChange={(e) => setProfileUrl(e.target.value)} />
+                            </>)}
 
                             <button className="btn btn-neutral mt-4" onClick={formType === "login" ? submitLogin : handleSignup}>{formType === "login" ? "Login" : "Sign Up"}</button>
 
                         </fieldset>
-                        {formType === "login" && (<p className='text-left text-orange-500 cursor-pointer' onClick={() => setFormType("signup")}>Not already a member? SignUp Now</p>)}
+                        {formType === "login" && (<p className='text-left text-orange-500 cursor-pointer' onClick={() => {
+                            setFormType("signup"); setEmail("")
+                            setPassword("")
+                        }}>Not already a member? SignUp Now</p>)}
                     </div>
                 </div>
             </div>

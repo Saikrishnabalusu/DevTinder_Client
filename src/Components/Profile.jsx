@@ -57,9 +57,9 @@ export const Profile = () => {
 
         {showAlert && <Alert message={alertMessage} type={alertType} />}
 
-        <div className="container w-full h-auto flex justify-center items-center">
-            <div className='flex justify-center items-center gap-10 w-2/3 h-auto'>
-                <fieldset className="fieldset bg-base-300 border-base-300 rounded-box w-2/3 border p-4">
+        <div className="container w-9/12 h-auto flex justify-center items-center gap-2 mx-auto mt-22">
+            <div className='flex justify-center items-center gap-10 w-full h-auto'>
+                <fieldset className="fieldset bg-base-300 border-base-300 rounded-box w-1/2 border p-4">
                     <legend className="fieldset-legend font-bold text-xl">Profile</legend>
                     <label className="label">First Name</label>
                     <input type="text" className="input w-full" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -80,7 +80,7 @@ export const Profile = () => {
                     <input type="textarea" className="textarea w-full" placeholder="About" value={about} onChange={(e) => setAbout(e.target.value)} />
                     <button className="btn btn-neutral mt-4" onClick={handleProfileUpdate}>Update</button>
                 </fieldset>
-                <Card firstName={firstName} lastName={lastName} age={age} gender={gender} profileUrl={profileUrl} skills={skills} about={about} />
+                <Card firstName={firstName} lastName={lastName} age={age} gender={gender} profileUrl={profileUrl} skills={skills} about={about} className="w-80" />
             </div>
         </div>
     </>)
