@@ -10,7 +10,7 @@ const RequestSlice = createSlice({
             state.pendingRequests = action.payload;
         },
         removePendingRequest: (state, action) => {
-            state.pendingRequests = state.pendingRequests.filter(request => request._id !== action.payload);
+            state.pendingRequests = state.pendingRequests.filter(request => request._id !== action.payload.id);
         }
     }
 });
