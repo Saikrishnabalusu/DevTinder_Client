@@ -3,14 +3,15 @@ import React from 'react'
 import { BASE_URL } from '../Utils/constants'
 import { useDispatch } from 'react-redux'
 import { removePendingRequest } from '../reducers/requestReducer'
+import { Link } from 'react-router-dom'
 
-const UserList = ({ id, profileUrl, firstName, lastName, gender, age, skills, listControls = true }) => {
+const UserList = ({ id, profileUrl, firstName, lastName, gender, age, skills, listControls = true, chatControls = false }) => {
 
     const dispatch = useDispatch()
 
     const handleClick = async (id, type) => {
         try {
-            console.log(id, "request Accepted")
+            // console.log(id, "request Accepted")
             await axios.post(`${BASE_URL}/review/${type}/${id}`, {}, { withCredentials: true });
             dispatch(removePendingRequest({ id }))
 
@@ -25,7 +26,7 @@ const UserList = ({ id, profileUrl, firstName, lastName, gender, age, skills, li
             <div><img className="size-10 rounded-box" src={profileUrl} /></div>
             <div>
                 <div>{firstName + " " + lastName}</div>
-                <div className="text-xs uppercase font-semibold opacity-60">{gender} | {age} | Skills : {skills?.length ? skills.join(", ") : "N/A"}</div>
+                <div className="text-xs uppercase font-semibold opacity-60">{gender} | {age} | Skills : {skills?.length > 0 ? skills.join(", ") : "N/A"}</div>
                 {/* <div className="text-xs uppercase font-semibold opacity-60">Remaining Reason</div> */}
             </div>
             {listControls && (
@@ -34,6 +35,11 @@ const UserList = ({ id, profileUrl, firstName, lastName, gender, age, skills, li
                     <button className="btn btn-error" onClick={() => handleClick(id, "rejected")}>Reject</button>
                 </>
             )}
+            {chatControls && <Link to={`/chat/${id}`}>
+
+                <button className="btn btn-primary" >Chat</button></Link>
+
+            }
         </li>
     )
 }

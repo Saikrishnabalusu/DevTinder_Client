@@ -22,6 +22,7 @@ const NavBar = () => {
             </div>
             <div className="flex gap-3 mx-2">
                 {loginUser && (<input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />)}
+                {loginUser && (<h1 className='font-bold text-xl text-secondary'>{`Hello ${loginUser.firstName}`}</h1>)}
                 {loginUser && (<div className="dropdown dropdown-end mx-2">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">

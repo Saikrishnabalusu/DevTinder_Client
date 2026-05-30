@@ -34,7 +34,7 @@ const Connections = () => {
 
             <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">Your Connections</li>
             {myConnections.length >= 0 && myConnections.map((connection) =>
-                <UserList key={connection._id} profileUrl={connection.profileUrl} firstName={connection.firstName} lastName={connection.lastName} gender={connection.gender} age={connection.age} skills={connection.skills} listControls={false} />)}
+                <UserList key={connection._id} id={connection._id} profileUrl={connection.profileUrl} firstName={connection.firstName} lastName={connection.lastName} gender={connection.gender} age={connection.age} skills={connection.skills} listControls={false} chatControls={true} />)}
 
         </ul>
     )
