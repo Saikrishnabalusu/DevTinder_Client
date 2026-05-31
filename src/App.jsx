@@ -14,6 +14,7 @@ import axios from 'axios'
 import { BASE_URL } from './Utils/constants'
 import { useDispatch } from 'react-redux'
 import { addUser } from './reducers/userReducer'
+import Chat from './Components/Chat'
 // import { useNavigate } from 'react-router-dom'
 
 
@@ -33,9 +34,9 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route index element={<Feed />} />
           <Route path="/profile" element={<Profile />} />
-          {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/Myconnections" element={<Connections />} />
           <Route path="/ReviewRequests" element={<ReviewRequests />} />
+          <Route path="/chat/:targetUserId" element={<Chat />} />
         </Route>
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>

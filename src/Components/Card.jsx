@@ -16,8 +16,8 @@ const Card = ({ id, firstName, lastName, age, about, skills, gender, profileUrl,
                 <p> {skills?.join(', ')} </p>
                 <p className="text-wrap">{about}</p>
                 {showButton && (<div className="card-actions justify-center">
-                    <button className="btn btn-warning p-2" onClick={() => handleIgnored(id)}>Ignored</button>
-                    <button className="btn btn-success p-2" onClick={() => handleInterested(id)}>Interested</button>
+                    <button className="btn btn-secondary p-2" onClick={() => handleIgnored(id)}>Ignored</button>
+                    <button className="btn btn-primary p-2" onClick={() => handleInterested(id)}>Interested</button>
 
                 </div>)}
             </div>
