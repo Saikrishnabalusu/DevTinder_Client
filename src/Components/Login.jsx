@@ -20,6 +20,7 @@ const Login = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMsg, setAlertMsg] = useState('')
     const [alertType, setAlertType] = useState('info')
+    const [profileImage, setProfileImage] = useState(null)
     const loginUser = useSelector(state => state.user.value)
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const Login = () => {
         setAlertMsg('')
         setShowAlert(false);
         setFormType('signup')
+        // console.log("profileImage:", profileImage)
 
         try {
             const payload = {
@@ -67,10 +69,11 @@ const Login = () => {
                 password,
                 age,
                 gender,
-                profileUrl
+                profileUrl,
+                profileImage
             }
             setShowAlert(false);
-            axios.post(BASE_URL + "/signup", payload, { withCredentials: true }).then((res) => {
+            axios.post(BASE_URL + "/signup", payload, { withCredentials: true, headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
                 setAlertMsg(res.data?.message || "SignUp successful");
                 setAlertType("success");
                 setShowAlert(true);
@@ -108,21 +111,23 @@ const Login = () => {
                     <div className="card-body">
                         <fieldset className="fieldset">
                             {formType === "signup" && (<><label className="label">First Name</label>
-                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text" className="input border-primary-100 border px-1 w-full text-lg" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                                 <label className="label">Last Name</label>
-                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} /></>)}
+                                <input type="text" className="input border-primary-100 border px-1 w-full text-lg" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} /></>)}
                             <label className="label">Email</label>
-                            <input type="email" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="example@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input type="email" className="input border-primary-100 border px-1 w-full text-lg" placeholder="example@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                             <label className="label">Password</label>
-                            <input type="password" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
-                            {formType === "signup" && (<><div><a className="link link-hover">Forgot password?</a></div>
+                            <input type="password" className="input border-primary-100 border px-1 w-full text-lg" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
+                            {formType === "signup" && (<form enctype="multipart/form-data"><div><a className="link link-hover">Forgot password?</a></div>
                                 <label className="label">Age</label>
-                                <input type="number" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
+                                <input type="number" className="input border-primary-100 border px-1 w-full text-lg" placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
                                 <label className="label">Gender</label>
-                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Gender" value={gender} onChange={(e) => setGender(e.target.value)} />
-                                <label className="label">ProfileUrl</label>
-                                <input type="text" className="input border-neutral-100 border-1 px-1 w-full text-lg" placeholder="Your Profile url" value={profileUrl} onChange={(e) => setProfileUrl(e.target.value)} />
-                            </>)}
+                                <input type="text" className="input border-primary-100 border px-1 w-full text-lg" placeholder="Gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+                                {/* <label className="label">ProfileUrl</label>
+                                <input type="text" className="input border-primary-100 border px-1 w-full text-lg" placeholder="Your Profile url" value={profileUrl} onChange={(e) => setProfileUrl(e.target.value)} /> */}
+                                <label className="label">profileImage</label>
+                                <input type="file" className="input border-primary-100 border p-1 w-full " placeholder="Your Profile image" onChange={(e) => setProfileImage(e.target.files[0])} />
+                            </form>)}
 
                             <button className="btn btn-neutral mt-4" onClick={formType === "login" ? submitLogin : handleSignup}>{formType === "login" ? "Login" : "Sign Up"}</button>
 
